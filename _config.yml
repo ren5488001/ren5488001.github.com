@@ -1,9 +1,10 @@
 # Site settings
 name: 闲云客栈
 email: ren5488001@163.com
-author: RKW
-url: http://www.hifreud.com
+author: 任科维
+url: https://ren5488001.github.io/
 resume_site: http://www.hifreud.com/Resume.io/
+github_username: ren5488001
 github: https://github.com/ren5488001/
 baseurl: ""
 description: 治愈恐慌症!
@@ -11,16 +12,7 @@ meta_description: 任科维;个人博客;学而不思则罔;思而不学则殆;�
 motto: 生命不止;折腾不休;专治职业恐慌症。
 banner: 学而不思则罔，思而不学则殆!
 
-#permalink: /:categories/:year/:month/:day/:title/
 permalink: /:year/:month/:day/:title/
 paginate: 10
-
-exclude: ['README.md', 'Gemfile.lock', 'Gemfile', 'Rakefile']
-
-github_username: ren5488001
-
-# Build settings
+exclude: ['README.md']
 markdown: kramdown
-
-#baidu_analysis: 94be4b0f9fc5d94cc0d0415ea6761ae9
-
