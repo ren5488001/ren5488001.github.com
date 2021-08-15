@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "springcloud组件之Eureka"
-date:   2021-8-15 9:40:00 +0800
-categories: springcloud组件
-tag: springcloud组件
+title:  "springcloud组件之Actuator"
+date:   2021-8-15 20:40:00 +0800
+categories: springcloud组件Actuator
+tag: springcloud组件Actuator
 ---
 
 * content
