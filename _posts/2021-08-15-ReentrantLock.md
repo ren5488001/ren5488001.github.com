@@ -32,7 +32,7 @@ ReenTrantLock中Sync有FairSync公平锁和NonFairSync非公平锁两个实现�
     }
 ```
 
-<img src="C:\Users\renkewei\Desktop\FairSync.png" alt="FairSync" style="zoom:80%;" />
+![FairSync](https://renkewei-blogimg.oss-cn-beijing.aliyuncs.com/img/FairSync.png)
 
 以下按照各个方法功能的调用说明ReenTrantLock的实现
 
@@ -133,6 +133,39 @@ ReenTrantLock中Sync有FairSync公平锁和NonFairSync非公平锁两个实现�
                 if (failed)
                     cancelAcquire(node);
             }
+        }
+		// 检查节点状态waitStatus
+        private static boolean shouldParkAfterFailedAcquire(AbstractQueuedSynchronizer.Node pred, AbstractQueuedSynchronizer.Node node) {
+            // 查询前置节点状态
+            // CANCELLED =  1 
+            // SIGNAL    = -1
+            // CONDITION = -2
+            // PROPAGATE = -3
+            int ws = pred.waitStatus;
+            if (ws == AbstractQueuedSynchronizer.Node.SIGNAL)
+                /*
+                 * This node has already set status asking a release
+                 * to signal it, so it can safely park.
+                 */
+                return true;
+            if (ws > 0) {
+                /*
+                 * Predecessor was cancelled. Skip over predecessors and
+                 * indicate retry.
+                 */
+                do {
+                    node.prev = pred = pred.prev;
+                } while (pred.waitStatus > 0);
+                pred.next = node;
+            } else {
+                /*
+                 * waitStatus must be 0 or PROPAGATE.  Indicate that we
+                 * need a signal, but don't park yet.  Caller will need to
+                 * retry to make sure it cannot acquire before parking.
+                 */
+                compareAndSetWaitStatus(pred, ws, AbstractQueuedSynchronizer.Node.SIGNAL);
+            }
+            return false;
         }
         //非公平锁NonfairSync的实现
         final void lock() {
